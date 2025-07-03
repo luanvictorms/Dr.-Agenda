@@ -50,6 +50,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - Drizzle for ORM
 - Next.js 15 for frontend
 - TypeScript for type safety
+- Shadcn/ui for components
 
 ## Data Structure Tables
 
