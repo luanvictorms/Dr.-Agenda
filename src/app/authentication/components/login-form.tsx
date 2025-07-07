@@ -92,6 +92,7 @@ const LoginForm = () => {
                   <FormControl>
                     <Input
                       placeholder="Type your registered password"
+                      type="password"
                       {...field}
                     />
                   </FormControl>
