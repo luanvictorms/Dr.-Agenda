@@ -15,6 +15,7 @@
 - TypeScript for type safety
 - Shadcn/ui for components
 - Zod for form validation
+- Better-Auth for authentication
 
 ## Data Structure Tables
 
@@ -24,8 +25,8 @@
 - Patient
 - Appointments
 
-User can have many clinics and one clinic can have many users. (Many to many/M2M)
-Clinic have many doctors and doctors have one clinic. (One to many/O2M)
+User can have many clinics and one clinic can have many users. (M2M/M2M)
+Clinic have many doctors and doctors have one clinic. (O2M/O2M)
 Doctor have one clinic (O2O)
 One Clinic can have many Patients (O2M)
 One Doctors can have many appointments (O2M)
