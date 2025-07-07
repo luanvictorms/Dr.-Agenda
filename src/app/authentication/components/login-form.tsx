@@ -45,6 +45,7 @@ const LoginForm = () => {
       },
       {
         onSuccess: () => {
+          toast.success("Logged in successfully");
           router.push("/dashboard");
         },
         onError: () => {
