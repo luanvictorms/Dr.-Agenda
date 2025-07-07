@@ -48,7 +48,7 @@ const LoginForm = () => {
           router.push("/dashboard");
         },
         onError: () => {
-          toast.error("Invalid email or password");
+          toast.error("Invalid credentials");
         },
       },
     );
