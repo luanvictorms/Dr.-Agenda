@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -46,7 +46,7 @@ const principalItems = [
     icon: CalendarDays,
   },
   {
-    title: "Medics",
+    title: "Doctors",
     url: "/doctors",
     icon: Stethoscope,
   },
@@ -67,6 +67,7 @@ const otherItems = [
 
 export function AppSidebar() {
   const session = authClient.useSession();
+  const pathname = usePathname();
 
   const handleSignOut = async () => {
     await authClient.signOut();
@@ -85,7 +86,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {principalItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild isActive={pathname === item.url}>
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>

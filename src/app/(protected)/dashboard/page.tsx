@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { db } from "@/db";
-import { clinicsTable, usersToClinicsTable } from "@/db/schema";
+import { usersToClinicsTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 const DashboardPage = async () => {
@@ -23,15 +23,9 @@ const DashboardPage = async () => {
     redirect("/clinic-form");
   }
 
-  const principalClinic = await db.query.clinicsTable.findFirst({
-    where: eq(clinicsTable.id, clinics[0].clinicId),
-  });
-
   return (
-    <div>
+    <div className="p-4">
       <h1>Dashboard</h1>
-      <h1>{session?.user?.name}</h1>
-      <h1>{principalClinic?.name}</h1>
     </div>
   );
 };
