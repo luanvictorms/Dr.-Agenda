@@ -15,7 +15,7 @@
 - TypeScript for type safety
 - Shadcn/ui for components
 - Zod for form validation
-- Better-Auth for authentication
+- Better-Auth for authentication (Google)
 
 ## Data Structure Tables
 
