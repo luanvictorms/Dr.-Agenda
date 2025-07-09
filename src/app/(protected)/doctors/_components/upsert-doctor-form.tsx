@@ -1,8 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
+import { toast } from "sonner";
 import z from "zod";
 
+import { upsertDoctor } from "@/actions/upsert-doctor";
 import { Button } from "@/components/ui/button";
 import {
   DialogContent,
@@ -33,7 +36,11 @@ import {
 import { medicalSpecialties } from "../_constants";
 import { doctorFormSchema } from "../doctorSchema";
 
-const UpsertDoctorForm = () => {
+interface UpsertDoctorFormProps {
+  onSuccess?: () => void;
+}
+
+const UpsertDoctorForm = ({ onSuccess }: UpsertDoctorFormProps) => {
   const form = useForm<z.infer<typeof doctorFormSchema>>({
     resolver: zodResolver(doctorFormSchema),
     defaultValues: {
@@ -47,8 +54,24 @@ const UpsertDoctorForm = () => {
     },
   });
 
+  const upsertDoctorAction = useAction(upsertDoctor, {
+    onSuccess: () => {
+      toast.success("Doctor created successfully");
+      form.reset();
+      onSuccess?.();
+    },
+    onError: () => {
+      toast.error("Failed to create doctor");
+    },
+  });
+
   const onSubmit = (values: z.infer<typeof doctorFormSchema>) => {
-    console.log(values);
+    upsertDoctorAction.execute({
+      ...values,
+      availableFromWeekDay: parseInt(values.availableFromWeekDay),
+      availableToWeekDay: parseInt(values.availableToWeekDay),
+      appointmentPriceInCents: values.appointmentPrice * 100,
+    });
   };
 
   return (
@@ -195,8 +218,8 @@ const UpsertDoctorForm = () => {
           <FormLabel>Time availability</FormLabel>
           <div className="flex gap-4">
             <FormField
-              control={form.control}
               name="availableFromTime"
+              control={form.control}
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel>From</FormLabel>
@@ -265,8 +288,8 @@ const UpsertDoctorForm = () => {
             />
 
             <FormField
-              control={form.control}
               name="availableToTime"
+              control={form.control}
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel>To</FormLabel>
@@ -336,7 +359,11 @@ const UpsertDoctorForm = () => {
           </div>
 
           <DialogFooter>
-            <Button type="submit">Add doctor</Button>
+            <Button type="submit" disabled={upsertDoctorAction.isPending}>
+              {upsertDoctorAction.isExecuting
+                ? "Adding Doctor..."
+                : "Add doctor"}
+            </Button>
           </DialogFooter>
         </form>
       </Form>
