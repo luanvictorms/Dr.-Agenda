@@ -13,7 +13,7 @@ export const PageHeaderContent = ({
 }: {
   children: React.ReactNode;
 }) => {
-  return <h1 className="w-full space-y-1">{children}</h1>;
+  return <div className="w-full space-y-1">{children}</div>;
 };
 
 export const PageTitle = ({ children }: { children: React.ReactNode }) => {
