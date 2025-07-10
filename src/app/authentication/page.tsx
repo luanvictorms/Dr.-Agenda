@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -17,7 +18,11 @@ const AuthenticationPage = async () => {
   }
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="flex h-screen w-screen items-center justify-center bg-blue-800">
+      {/* Logo no canto superior esquerdo */}
+      <div className="absolute top-6 left-6 z-10">
+        <Image src="/LogoWhite.png" alt="Dr. Agenda" width={136} height={28} />
+      </div>
       <Tabs defaultValue="account" className="w-[90%] md:w-[40%]">
         <TabsList className="w-[100%]">
           <TabsTrigger value="account">Login</TabsTrigger>

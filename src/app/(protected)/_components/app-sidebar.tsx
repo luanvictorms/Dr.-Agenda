@@ -30,7 +30,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { authClient } from "@/lib/auth-client";
 
 // Menu items.
@@ -66,12 +68,20 @@ const otherItems = [
 ];
 
 export function AppSidebar() {
+  const { toggleSidebar } = useSidebar();
   const session = authClient.useSession();
   const pathname = usePathname();
+  const isMobile = useIsMobile();
 
   const handleSignOut = async () => {
     await authClient.signOut();
     redirect("/authentication");
+  };
+
+  const handleCloseSidebar = () => {
+    if (isMobile) {
+      toggleSidebar();
+    }
   };
 
   return (
@@ -86,7 +96,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {principalItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={pathname === item.url}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname === item.url}
+                    onClick={handleCloseSidebar}
+                  >
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -103,7 +117,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {otherItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    asChild
+                    onClick={handleCloseSidebar}
+                    isActive={pathname === item.url}
+                  >
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>

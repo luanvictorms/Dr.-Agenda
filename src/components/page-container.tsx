@@ -35,3 +35,13 @@ export const PageActions = ({ children }: { children: React.ReactNode }) => {
 export const PageContent = ({ children }: { children: React.ReactNode }) => {
   return <div className="space-y-6">{children}</div>;
 };
+
+export const PageCardContent = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  return (
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-4">{children}</div>
+  );
+};
