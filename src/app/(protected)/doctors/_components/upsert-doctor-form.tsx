@@ -32,42 +32,56 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { doctorsTable } from "@/db/schema";
 
 import { medicalSpecialties } from "../_constants";
 import { doctorFormSchema } from "../doctorSchema";
 
 interface UpsertDoctorFormProps {
+  doctor?: typeof doctorsTable.$inferSelect;
   onSuccess?: () => void;
 }
 
-const UpsertDoctorForm = ({ onSuccess }: UpsertDoctorFormProps) => {
+const UpsertDoctorForm = ({ doctor, onSuccess }: UpsertDoctorFormProps) => {
   const form = useForm<z.infer<typeof doctorFormSchema>>({
     resolver: zodResolver(doctorFormSchema),
     defaultValues: {
-      name: "",
-      speciality: "",
-      appointmentPrice: 0,
-      availableFromTime: "",
-      availableToTime: "",
-      availableToWeekDay: "5",
-      availableFromWeekDay: "1",
+      name: doctor?.name ?? "",
+      speciality: doctor?.speciality ?? "",
+      appointmentPrice: doctor?.appointmentPriceInCents
+        ? doctor?.appointmentPriceInCents / 100
+        : 0,
+      availableFromTime: doctor?.availableFromTime ?? "",
+      availableToTime: doctor?.availableToTime ?? "",
+      availableToWeekDay: doctor?.availableToWeekDay?.toString() ?? "5",
+      availableFromWeekDay: doctor?.availableFromWeekDay.toString() ?? "1",
     },
   });
 
   const upsertDoctorAction = useAction(upsertDoctor, {
     onSuccess: () => {
-      toast.success("Doctor created successfully");
-      form.reset();
-      onSuccess?.();
+      if (doctor) {
+        toast.success("Doctor updated successfully");
+        onSuccess?.();
+      } else {
+        toast.success("Doctor created successfully");
+        form.reset();
+        onSuccess?.();
+      }
     },
     onError: () => {
-      toast.error("Failed to create doctor");
+      if (doctor) {
+        toast.error("Failed to update doctor");
+      } else {
+        toast.error("Failed to create doctor");
+      }
     },
   });
 
   const onSubmit = (values: z.infer<typeof doctorFormSchema>) => {
     upsertDoctorAction.execute({
       ...values,
+      id: doctor?.id,
       availableFromWeekDay: parseInt(values.availableFromWeekDay),
       availableToWeekDay: parseInt(values.availableToWeekDay),
       appointmentPriceInCents: values.appointmentPrice * 100,
@@ -77,8 +91,12 @@ const UpsertDoctorForm = ({ onSuccess }: UpsertDoctorFormProps) => {
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Add doctor</DialogTitle>
-        <DialogDescription>Make a new doctor to your clinic</DialogDescription>
+        <DialogTitle>{doctor ? doctor.name : "Add doctor"}</DialogTitle>
+        <DialogDescription>
+          {doctor
+            ? "Manage doctor information"
+            : "Make a new doctor to your clinic"}
+        </DialogDescription>
       </DialogHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -361,8 +379,12 @@ const UpsertDoctorForm = ({ onSuccess }: UpsertDoctorFormProps) => {
           <DialogFooter>
             <Button type="submit" disabled={upsertDoctorAction.isPending}>
               {upsertDoctorAction.isExecuting
-                ? "Adding Doctor..."
-                : "Add doctor"}
+                ? doctor
+                  ? "Updating Doctor..."
+                  : "Adding Doctor..."
+                : doctor
+                  ? "Update doctor"
+                  : "Add doctor"}
             </Button>
           </DialogFooter>
         </form>
