@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 
 import {
   PageActions,
-  PageCardContent,
   PageContainer,
   PageContent,
   PageDescription,
@@ -18,7 +17,7 @@ import { doctorsTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 import AddDoctorButton from "./_components/add-doctor-button";
-import DoctorCard from "./_components/doctor-card";
+import { DoctorsList } from "./_components/doctor-list";
 
 const DoctorsPage = async () => {
   const session = await auth.api.getSession({
@@ -35,6 +34,7 @@ const DoctorsPage = async () => {
 
   const doctors = await db.query.doctorsTable.findMany({
     where: eq(doctorsTable.clinicId, session.user.clinic.id),
+    orderBy: (doctorsTable, { asc }) => [asc(doctorsTable.name)],
   });
 
   return (
@@ -50,11 +50,7 @@ const DoctorsPage = async () => {
       </PageHeader>
       <Separator />
       <PageContent>
-        <PageCardContent>
-          {doctors.map((doctor) => (
-            <DoctorCard doctor={doctor} key={doctor.id} />
-          ))}
-        </PageCardContent>
+        <DoctorsList doctors={doctors} />
       </PageContent>
     </PageContainer>
   );

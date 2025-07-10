@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 
 import {
   PageActions,
-  PageCardContent,
   PageContainer,
   PageContent,
   PageDescription,
@@ -12,25 +11,21 @@ import {
   PageHeaderContent,
   PageTitle,
 } from "@/components/page-container";
+import { Separator } from "@/components/ui/separator";
 import { db } from "@/db";
 import { patientsTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 import { AddPatientButton } from "./_components/add-patient-button";
-import { PatientCard } from "./_components/patient-card";
+import { PatientsList } from "./_components/patients-list";
 
-const PatientsPage = async () => {
+export default async function PatientsPage() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
-  if (!session) {
-    redirect("/authentication");
-  }
-
-  if (!session.user.clinic) {
-    redirect("/clinics-form");
-  }
+  if (!session) redirect("/authentication");
+  if (!session.user.clinic) redirect("/clinics-form");
 
   const patients = await db.query.patientsTable.findMany({
     where: eq(patientsTable.clinicId, session.user.clinic.id),
@@ -41,21 +36,16 @@ const PatientsPage = async () => {
       <PageHeader>
         <PageHeaderContent>
           <PageTitle>Patients</PageTitle>
-          <PageDescription>View your patients</PageDescription>
+          <PageDescription>View or search your patients</PageDescription>
         </PageHeaderContent>
         <PageActions>
           <AddPatientButton />
         </PageActions>
       </PageHeader>
+      <Separator />
       <PageContent>
-        <PageCardContent>
-          {patients.map((patient) => (
-            <PatientCard patient={patient} key={patient.id} />
-          ))}
-        </PageCardContent>
+        <PatientsList patients={patients} />
       </PageContent>
     </PageContainer>
   );
-};
-
-export default PatientsPage;
+}

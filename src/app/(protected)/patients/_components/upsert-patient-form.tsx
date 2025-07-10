@@ -38,7 +38,6 @@ export function UpsertPatientForm({
   onSuccess,
 }: UpsertPatientFormProps) {
   const form = useForm<z.infer<typeof patientFormSchema>>({
-    shouldUnregister: true,
     resolver: zodResolver(patientFormSchema),
     defaultValues: {
       name: patient?.name ?? "",
