@@ -18,6 +18,7 @@ import { doctorsTable } from "@/db/schema";
 import { formatCurreyInCents } from "@/helpers/currency";
 
 import { getAvailability } from "../_helpers/availability";
+import DeleteDoctorAlertDialog from "./delete-doctor-alert-dialog";
 import UpsertDoctorForm from "./upsert-doctor-form";
 
 interface DoctorCardProps {
@@ -35,17 +36,21 @@ const DoctorCard = ({ doctor }: DoctorCardProps) => {
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center gap-2">
-          <Avatar className="h-10 w-10">
-            <AvatarFallback>{doctorInitials}</AvatarFallback>
-          </Avatar>
-          <div>
-            <h3 className="text-sm font-medium">{doctor.name}</h3>
-            <p className="text-muted-foreground text-sm">{doctor.speciality}</p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Avatar className="h-10 w-10">
+              <AvatarFallback>{doctorInitials}</AvatarFallback>
+            </Avatar>
+            <div>
+              <h3 className="text-sm font-medium">{doctor.name}</h3>
+              <p className="text-muted-foreground text-sm">
+                {doctor.speciality}
+              </p>
+            </div>
           </div>
+          <DeleteDoctorAlertDialog doctor={doctor} />
         </div>
       </CardHeader>
-
       <Separator />
 
       <CardContent className="flex flex-col gap-2">
