@@ -1,9 +1,10 @@
-import { Plus } from "lucide-react";
+import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import {
   PageActions,
+  PageCardContent,
   PageContainer,
   PageContent,
   PageDescription,
@@ -11,8 +12,12 @@ import {
   PageHeaderContent,
   PageTitle,
 } from "@/components/page-container";
-import { Button } from "@/components/ui/button";
+import { db } from "@/db";
+import { patientsTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
+
+import { AddPatientButton } from "./_components/add-patient-button";
+import { PatientCard } from "./_components/patient-card";
 
 const PatientsPage = async () => {
   const session = await auth.api.getSession({
@@ -27,6 +32,10 @@ const PatientsPage = async () => {
     redirect("/clinics-form");
   }
 
+  const patients = await db.query.patientsTable.findMany({
+    where: eq(patientsTable.clinicId, session.user.clinic.id),
+  });
+
   return (
     <PageContainer>
       <PageHeader>
@@ -35,14 +44,15 @@ const PatientsPage = async () => {
           <PageDescription>View your patients</PageDescription>
         </PageHeaderContent>
         <PageActions>
-          <Button>
-            <Plus />
-            Add Patient
-          </Button>
+          <AddPatientButton />
         </PageActions>
       </PageHeader>
       <PageContent>
-        <h1>Patients</h1>
+        <PageCardContent>
+          {patients.map((patient) => (
+            <PatientCard patient={patient} key={patient.id} />
+          ))}
+        </PageCardContent>
       </PageContent>
     </PageContainer>
   );
