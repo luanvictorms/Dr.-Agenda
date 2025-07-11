@@ -50,6 +50,5 @@ npx drizzle-kit studio (view database)
   - [x] clinic needs to be able to manage doctors' availability (Create/Read/Update/Delete)
   - [x] clinic needs to be able to manage doctors' specializations (Create/Read/Update/Delete)
   - [x] clinic needs to be able to manage doctors' Prices.
-- [] clinic needs to be able to manage patients (Create/Read/Update/Delete)
-- [] clinic needs to be able to create appointments of x medical for 1 pattient (Create/Read/Update/Delete)
-- [] We will have subscription plans for clinics.
+- [x] clinic needs to be able to manage patients (Create/Read/Update/Delete)
+- [x] clinic needs to be able to create appointments of x medical for 1 pattient (Create/Read/Update/Delete)
