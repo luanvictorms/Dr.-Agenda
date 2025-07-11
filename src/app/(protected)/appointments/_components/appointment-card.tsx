@@ -1,6 +1,8 @@
 "use client";
 
 import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import { Calendar, Clock, DollarSign, UserRound } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -9,6 +11,9 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { appointmentsTable } from "@/db/schema";
 import { formatCurrencyInCents } from "@/helpers/currency";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 import DeleteAppointmentAlertDialog from "./delete-appointment-alert-dialog";
 

@@ -1,8 +1,6 @@
 "use client";
 
 import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
 import { useMemo, useState } from "react";
 
 import { PageCardContent } from "@/components/page-container";
@@ -11,9 +9,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { appointmentsTable } from "@/db/schema";
 
 import { AppointmentCard } from "./appointment-card";
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 type Appointment = typeof appointmentsTable.$inferSelect & {
   patient: { name: string };
