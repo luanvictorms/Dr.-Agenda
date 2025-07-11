@@ -16,7 +16,7 @@ import {
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { appointmentsTable } from "@/db/schema";
-import { formatCurreyInCents } from "@/helpers/currency";
+import { formatCurrencyInCents } from "@/helpers/currency";
 
 import DeleteAppointmentAlertDialog from "./delete-appointment-alert-dialog";
 
@@ -72,7 +72,7 @@ export function AppointmentCard({ appointment }: AppointmentCardProps) {
         </Badge>
         <Badge variant="outline">
           <DollarSign className="mr-1" />
-          {formatCurreyInCents(appointment.appointmentPriceInCents)}
+          {formatCurrencyInCents(appointment.appointmentPriceInCents)}
         </Badge>
       </CardContent>
       <Separator />
