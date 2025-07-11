@@ -120,7 +120,7 @@ const UpsertDoctorForm = ({ doctor, onSuccess }: UpsertDoctorFormProps) => {
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Speciality</FormLabel>
+                <FormLabel>Specialty</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
