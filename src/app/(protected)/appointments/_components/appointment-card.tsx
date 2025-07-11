@@ -2,18 +2,10 @@
 
 import dayjs from "dayjs";
 import { Calendar, Clock, DollarSign, UserRound } from "lucide-react";
-import { useState } from "react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { appointmentsTable } from "@/db/schema";
 import { formatCurrencyInCents } from "@/helpers/currency";
@@ -30,7 +22,6 @@ interface AppointmentCardProps {
 }
 
 export function AppointmentCard({ appointment }: AppointmentCardProps) {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const patientInitials = appointment.patient.name
     .split(" ")
     .map((name) => name[0])
@@ -76,13 +67,6 @@ export function AppointmentCard({ appointment }: AppointmentCardProps) {
         </Badge>
       </CardContent>
       <Separator />
-      <CardFooter>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button className="w-full">Details</Button>
-          </DialogTrigger>
-        </Dialog>
-      </CardFooter>
     </Card>
   );
 }
