@@ -6,6 +6,7 @@
 - @tailwindcss/postcss -D for tailwindcss
 - prettier-plugin-tailwindcss -D for tailwindcss sorting
 - conventional commits for Github commit patterns
+- composition pattern
 
 ## Project Architecture
 

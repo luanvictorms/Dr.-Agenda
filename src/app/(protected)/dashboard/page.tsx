@@ -1,7 +1,19 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+import {
+  PageActions,
+  PageContainer,
+  PageContent,
+  PageDescription,
+  PageHeader,
+  PageHeaderContent,
+  PageTitle,
+} from "@/components/page-container";
+import { Separator } from "@/components/ui/separator";
 import { auth } from "@/lib/auth";
+
+import { DatePicker } from "./_components/date-picker";
 
 const DashboardPage = async () => {
   const session = await auth.api.getSession({
@@ -17,9 +29,19 @@ const DashboardPage = async () => {
   }
 
   return (
-    <div className="p-4">
-      <h1>Dashboard</h1>
-    </div>
+    <PageContainer>
+      <PageHeader>
+        <PageHeaderContent>
+          <PageTitle>Dashboard</PageTitle>
+          <PageDescription>View your clinic information</PageDescription>
+        </PageHeaderContent>
+        <PageActions>
+          <DatePicker />
+        </PageActions>
+      </PageHeader>
+      <Separator />
+      <PageContent></PageContent>
+    </PageContainer>
   );
 };
 
