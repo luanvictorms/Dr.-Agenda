@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 
 import {
   PageActions,
-  PageCardContent,
   PageContainer,
   PageContent,
   PageDescription,
@@ -20,6 +19,7 @@ import { patientsTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 import AddAppointmentButton from "./_components/add-appointment-button";
+import { AppointmentsList } from "./_components/appointments-list";
 
 const AppointmentsPage = async () => {
   const session = await auth.api.getSession({
@@ -63,9 +63,7 @@ const AppointmentsPage = async () => {
       </PageHeader>
       <Separator />
       <PageContent>
-        <PageCardContent>
-          <h1>Appointments list will be displayed here</h1>
-        </PageCardContent>
+        <AppointmentsList appointments={appointments} />
       </PageContent>
     </PageContainer>
   );
