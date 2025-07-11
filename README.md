@@ -25,6 +25,7 @@
 - Doctor
 - Patient
 - Appointments
+- UsersToClinics
 
 User can have many clinics and one clinic can have many users. (M2M/M2M)
 Clinic have many doctors and doctors have one clinic. (O2M/O2M)

@@ -3,7 +3,7 @@
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import {
   CalendarDays,
-  Diamond,
+  Gem,
   LayoutDashboard,
   LogOut,
   Stethoscope,
@@ -63,7 +63,7 @@ const otherItems = [
   {
     title: "Plans",
     url: "/plans",
-    icon: Diamond,
+    icon: Gem,
   },
 ];
 

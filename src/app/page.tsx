@@ -1,4 +1,5 @@
 "use client";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -32,7 +33,7 @@ const Home = () => {
             size={isMobile ? "default" : "lg"}
             className="bg-white px-6 font-semibold text-blue-900 hover:bg-blue-50"
           >
-            Start now
+            Start now <ArrowRight />
           </Button>
         </Link>
       </div>
