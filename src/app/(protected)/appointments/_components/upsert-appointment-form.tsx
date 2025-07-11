@@ -1,10 +1,14 @@
 "use client";
 
+import "dayjs/locale/pt-br";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import { CalendarIcon } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useEffect } from "react";
@@ -65,6 +69,9 @@ const formSchema = z.object({
     message: "Time is required.",
   }),
 });
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 interface AddAppointmentFormProps {
   isOpen: boolean;
@@ -320,7 +327,7 @@ const AddAppointmentForm = ({
                         value={time.value}
                         disabled={!time.available}
                       >
-                        {time.label} {!time.available && "(Indisponível)"}
+                        {time.label} {!time.available && "(Unavailable)"}
                       </SelectItem>
                     ))}
                   </SelectContent>
