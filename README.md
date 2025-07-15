@@ -52,3 +52,13 @@ npx drizzle-kit studio (view database)
   - [x] clinic needs to be able to manage doctors' Prices.
 - [x] clinic needs to be able to manage patients (Create/Read/Update/Delete)
 - [x] clinic needs to be able to create appointments of x medical for 1 pattient (Create/Read/Update/Delete)
+
+## Deployed Project:
+https://dr-agenda-mocha.vercel.app/
+
+## Mockups
+<img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/f2717b8b-a793-49d6-87c8-8aeaa9628caf" />
+<img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/56e0f20c-01ac-4fc1-bdbc-b1bf95a04995" />
+<img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/76bcdbfa-55ef-413a-9206-3fabab1ae636" />
+<img width="1920" height="1080" alt="4" src="https://github.com/user-attachments/assets/eb7a643f-62a5-4e92-b208-ea74a76655a5" />
+
