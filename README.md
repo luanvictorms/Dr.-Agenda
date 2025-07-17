@@ -57,6 +57,10 @@ npx drizzle-kit studio (view database)
 - [x] clinic needs to be able to manage patients (Create/Read/Update/Delete)
 - [x] clinic needs to be able to create appointments of x medical for 1 pattient (Create/Read/Update/Delete)
 
+## Key Features
+  <img width="583" height="443" alt="image" src="https://github.com/user-attachments/assets/cc0cf66f-1b8d-4bd4-9011-60c07261d6b8" />
+
+  
 ## App deepwiki
 https://deepwiki.com/luanvictorms/Dr.-Agenda
 
