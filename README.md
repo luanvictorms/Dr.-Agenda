@@ -53,6 +53,9 @@ npx drizzle-kit studio (view database)
 - [x] clinic needs to be able to manage patients (Create/Read/Update/Delete)
 - [x] clinic needs to be able to create appointments of x medical for 1 pattient (Create/Read/Update/Delete)
 
+## App deepwiki
+https://deepwiki.com/luanvictorms/Dr.-Agenda
+
 ## Deployed Project:
 https://dr-agenda-mocha.vercel.app/
 
