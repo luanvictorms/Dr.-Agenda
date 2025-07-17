@@ -18,6 +18,10 @@
 - Zod for form validation
 - Better-Auth for authentication (Google)
 
+## Detailed Stack
+  <img width="728" height="416" alt="image" src="https://github.com/user-attachments/assets/49916af1-583e-4f96-b299-9029291326ef" />
+
+
 ## Data Structure Tables
 
 - User
